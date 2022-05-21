@@ -10,9 +10,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: docker/login-action@v2
+    - uses: docker/build-push-action@v3
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+        repository: ${{ secrets.DOCKERHUB_REPOSITORY }}
+        tag_with_ref: true
